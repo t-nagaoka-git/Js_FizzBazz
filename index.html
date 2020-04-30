@@ -7,50 +7,58 @@
 <body>
   <h1>FIzzBuzz問題</h1>
 
-  FizzNum:<input id="fizz" type="text" placeholder="整数値を入力してください"><br />
-  BuzzNum:<input id="buzz" type="text" placeholder="整数値を入力してください" ><br /><br />
+  <div>
+    FizzNum:<input id="fizz" type="text" placeholder="整数値を入力してください">
+  </div>
 
-  <input id="exec_btn" type="button" value="実行"><br />
+  <div>
+    BuzzNum:<input id="buzz" type="text" placeholder="整数値を入力してください" >
+  </div>
+
+  <input id="exec-btn" type="button" value="実行">
 
   <h4>【出力】</h4>
 
   <div id="output"></div>
 
   <script>
-    document.getElementById('exec_btn').addEventListener('click', () => {
-      let output = document.getElementById('output');
+    document.getElementById('exec-btn').addEventListener('click', () => {
+      const output = document.getElementById('output');
+      const fizz = document.getElementById('fizz').value;
+      const buzz = document.getElementById('buzz').value;
+      const fizzNum = Number(fizz);
+      const buzzNum = Number(buzz);
+      // 出力内容を初期化
       for (let i = output.childNodes.length -1; i >= 0; i--) {
         output.removeChild(output.childNodes[i]);
       }
-
       // 空チェック
-      let fizz = document.getElementById('fizz').value;
-      let buzz = document.getElementById('buzz').value;
       if (!fizz || !buzz) {
         output.innerHTML = "<p>整数値を入力してください</p>";
         return;
       }
-
       // 文字列・小数チェック
-      let fizzNum = Number(fizz);
-      let buzzNum = Number(buzz);
       if ((Number.isInteger(fizzNum) === false) || (Number.isInteger(buzzNum) === false)) {
         output.innerHTML = "<p>整数値を入力してください</p>";
         return;
       }
-
-      for(let i = 1; i <= 100; i++){
+      // FizzBuzz出力
+      for(let i = 1; i <= 99; i++){
         if ((i % fizzNum === 0) & (i % buzzNum === 0)) {
-          output.appendChild(CreateOutput("FizzBuzz", i));
+          let result = createOutput("FizzBuzz", i);
+          output.appendChild(result);
         } else if (i % fizzNum === 0) {
-          output.appendChild(CreateOutput("Fizz", i));
+          let result = createOutput("Fizz", i);
+          output.appendChild(result);
         } else if (i % buzzNum === 0) {
-          output.appendChild(CreateOutput("Buzz", i));
+          let result = createOutput("Buzz", i)
+          output.appendChild(result);
         };
       }
     });
 
-    function CreateOutput(displayString, currentNum) {
+    // Outputへの出力内容を作成
+    function createOutput(displayString, currentNum) {
       let p = document.createElement('p');
       p.textContent = p.textContent = displayString + " " + currentNum;
       p.style.margin = "0";
