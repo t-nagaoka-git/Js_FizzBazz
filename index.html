@@ -45,13 +45,13 @@
       // FizzBuzz出力
       for(let i = 1; i <= 99; i++){
         if ((i % fizzNum === 0) & (i % buzzNum === 0)) {
-          let result = createOutput("FizzBuzz", i);
+          const result = createOutput("FizzBuzz", i);
           output.appendChild(result);
         } else if (i % fizzNum === 0) {
-          let result = createOutput("Fizz", i);
+          const result = createOutput("Fizz", i);
           output.appendChild(result);
         } else if (i % buzzNum === 0) {
-          let result = createOutput("Buzz", i)
+          const result = createOutput("Buzz", i)
           output.appendChild(result);
         };
       }
@@ -59,7 +59,7 @@
 
     // Outputへの出力内容を作成
     function createOutput(displayString, currentNum) {
-      let p = document.createElement('p');
+      const p = document.createElement('p');
       p.textContent = p.textContent = displayString + " " + currentNum;
       p.style.margin = "0";
       return p;
