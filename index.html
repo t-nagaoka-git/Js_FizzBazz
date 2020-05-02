@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>FIzzBuzz</title>
+</head>
+<body>
+  <h1>FIzzBuzz問題</h1>
+
+  <div>
+    FizzNum:<input id="fizz" type="text" placeholder="整数値を入力してください">
+  </div>
+
+  <div>
+    BuzzNum:<input id="buzz" type="text" placeholder="整数値を入力してください" >
+  </div>
+
+  <input id="exec-btn" type="button" value="実行">
+
+  <h4>【出力】</h4>
+
+  <div id="output"></div>
+
+  <script>
+    document.getElementById('exec-btn').addEventListener('click', () => {
+      const output = document.getElementById('output');
+      const fizz = document.getElementById('fizz').value;
+      const buzz = document.getElementById('buzz').value;
+      const fizzNum = Number(fizz);
+      const buzzNum = Number(buzz);
+      // 出力内容を初期化
+      for (let i = output.childNodes.length -1; i >= 0; i--) {
+        output.removeChild(output.childNodes[i]);
+      }
+      // 空チェック
+      if (!fizz || !buzz) {
+        output.innerHTML = "<p>整数値を入力してください</p>";
+        return;
+      }
+      // 文字列・小数チェック
+      if ((Number.isInteger(fizzNum) === false) || (Number.isInteger(buzzNum) === false)) {
+        output.innerHTML = "<p>整数値を入力してください</p>";
+        return;
+      }
+      // FizzBuzz出力
+      for(let i = 1; i <= 99; i++){
+        if ((i % fizzNum === 0) & (i % buzzNum === 0)) {
+          const result = createOutput("FizzBuzz", i);
+          output.appendChild(result);
+        } else if (i % fizzNum === 0) {
+          const result = createOutput("Fizz", i);
+          output.appendChild(result);
+        } else if (i % buzzNum === 0) {
+          const result = createOutput("Buzz", i)
+          output.appendChild(result);
+        };
+      }
+    });
+
+    // Outputへの出力内容を作成
+    function createOutput(displayString, currentNum) {
+      const p = document.createElement('p');
+      p.textContent = p.textContent = displayString + " " + currentNum;
+      p.style.margin = "0";
+      return p;
+    }
+  </script>
+</body>
+</html>
